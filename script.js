@@ -118,7 +118,7 @@ const showButton = () => {
 }
 
 const openDetails = (name) => {
-  window.location.href = `#pokemonDetails`;
+  location.href = `pages/details-page/details.html?name=${name}`;
 }
 
 window.addEventListener('scroll', () => {

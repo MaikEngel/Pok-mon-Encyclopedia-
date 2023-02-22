@@ -1,0 +1,19 @@
+.gap-8 {
+  gap: 8px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.m-0 {
+  margin: 0;
+}

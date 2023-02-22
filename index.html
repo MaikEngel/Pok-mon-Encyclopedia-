@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="onInit()">
-    <div>
-      <div id="pokemonImageContainer"></div>
+    <div class="content-wrapper">
+      <div id="pokemonList" class="results"></div>
+      <button id="loadMoreButton" class="d-none" onclick="renderPokemon()">Load more</button>
     </div>
   </body>
 </html>

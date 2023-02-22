@@ -1,0 +1,39 @@
+.img-layout {
+  width: 100%;
+  background-color: #dadae4;
+  border-radius: 4px;
+}
+
+.content-wrapper {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  float: left;
+  margin-right: -100%;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 88%;
+}
+
+.info-container {
+  max-width: 22%;
+  border-radius: 4px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 8px;
+  border: solid 2px rgb(173, 173, 173);
+}
+
+.pill {
+  width: 80px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 4px;
+}

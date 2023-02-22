@@ -4,6 +4,11 @@ let maxPokemon = 12;
 let currentPokemon = 0;
 let nextPokemon = 12;
 
+let pokemonLoaded = false;
+let showButtonFirstTime = false;
+let bottom = false;
+
+
 const onInit = () => {
   fetchPokemon();
 };
@@ -29,20 +34,19 @@ const fetchPokemon = () => {
 
 const renderPokemon = () => {
   let pokemonDataSort = pokemonData.sort((a, b) => a.id - b.id);
-  let loadMoreButton = document.getElementById("loadMoreButton");
   for (let i = currentPokemon; i < maxPokemon; i++) {
     let pokemonList = document.querySelector("#pokemonList");
     let pokemonContainer = document.createElement("div");
     pokemonContainer.setAttribute("class", "info-container");
+    pokemonContainer.setAttribute("onclick", `openDetails('${pokemonDataSort[i].name}')`)
     pokemonList.appendChild(pokemonContainer);
     rednerImageContainer(pokemonContainer, pokemonDataSort, i);
     renderIDContainer(pokemonContainer, pokemonDataSort, i);
     renderNameContainer(pokemonContainer, pokemonDataSort, i);
     renderTypesContainer(pokemonContainer, pokemonDataSort, i);
   }
-  loadMoreButton.classList.remove('d-none')
-  maxPokemon += nextPokemon;
-  currentPokemon += nextPokemon;
+  showButton();
+  countPokemon();
 };
 
 const rednerImageContainer = (pokemonContainer, pokemonDataSort, i) => {
@@ -88,3 +92,39 @@ const renderTypesContainer = (pokemonContainer, pokemonDataSort, i) => {
     pokemonContainer.appendChild(pokemonTypesContainer);
   }
 };
+
+const countPokemon = () => {
+  if (maxPokemon >= 888 && !bottom) {
+    maxPokemon = 890;
+    currentPokemon = 888
+    bottom = true
+    renderPokemon()
+  } else {
+    maxPokemon += nextPokemon;
+    currentPokemon += nextPokemon;
+  }
+}
+
+const showButton = () => {
+  let loadMoreButton = document.getElementById("loadMoreButton");
+  if (!pokemonLoaded && !showButtonFirstTime) {
+    loadMoreButton.classList.remove('d-none')
+    showButtonFirstTime = true
+  } else if (pokemonLoaded) {
+    loadMoreButton.classList.add('d-none')
+  } else if (!pokemonLoaded) {
+    pokemonLoaded = true
+  }
+}
+
+const openDetails = (name) => {
+  window.location.href = `#pokemonDetails`;
+}
+
+window.addEventListener('scroll', () => {
+  let distanceToBottom = document.documentElement.scrollHeight - (window.innerHeight + window.scrollY);
+  if (distanceToBottom < 50 && maxPokemon <= 889 && pokemonLoaded) {
+    console.log(maxPokemon);
+    renderPokemon()
+  }
+});

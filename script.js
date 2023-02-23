@@ -12,10 +12,10 @@ const onInit = () => {
   fetchPokemon();
 };
 
-const fetchPokemon = () => {
+const fetchPokemon = async () => {
   for (let i = 1; i < 891; i++) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-      .then((response) => response.json())
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+      .then(async (response) => await response.json())
       .then((data) => {
         pokemonData.push({
           id: data.id,

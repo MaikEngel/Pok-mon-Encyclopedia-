@@ -8,13 +8,18 @@
     <script src="../../script.js"></script>
     <script src="details.js"></script>
     <link rel="stylesheet" href="details.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../style.css" />
   </head>
-  <body onload="fetchImages()">
-    <div>
-        <div id="detailsHeaderContainer">
-            <h2 id="detailsHeaderContainerName"></h2>
+  <body onload="onInitDetails()">
+    <div class="content-wrapper">
+      <div id="detailsHeaderContainer">
+        <div>
+          <h2 id="detailsHeaderContainerName"></h2>
+          <h3 id="detailsHeaderContainerNameOtherLanguage"></h3>
         </div>
+        <div id="imageContainer"></div>
+        <div id="evolutionChain"></div>
+      </div>
     </div>
   </body>
 </html>

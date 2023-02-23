@@ -1,7 +1,7 @@
 pokemonInfo = [];
 pokemonSpecies = [];
 evolutionChain = [];
-evolutionImages = [];
+evolutionData = [];
 
 const urlParams = new URLSearchParams(window.location.search);
 const pokemonName = urlParams.get("name");
@@ -56,9 +56,12 @@ const fetchEvolutionImages = async () => {
   await fetch(`https://pokeapi.co/api/v2/pokemon/${firstEvolution}/`)
     .then(async (response) => await response.json())
     .then((data) => {
-      evolutionImages.push(data.sprites.other["official-artwork"].front_default)
+      evolutionData.push({
+        sprite: data.sprites.other["official-artwork"].front_default,
+        name: data.name,
+      })
       console.log("DataImages: ", data);
-      console.log(("EvolutionImages: ", evolutionImages));
+      console.log(("EvolutionData: ", evolutionData));
     })
     .catch((error) => console.error(error));
   if (evolutionChain) {

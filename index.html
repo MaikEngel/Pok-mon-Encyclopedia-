@@ -5,13 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="script.js"></script>
+    <script src="/header/header.js"></script>
     <title>Pokémon-Encyclopedia</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="onInit()">
+    <header id="header"></header>
     <div class="content-wrapper">
       <div id="pokemonList" class="results"></div>
-      <button id="loadMoreButton" class="d-none" onclick="renderPokemon()">Load more</button>
+      <button id="loadMoreButton" class="d-none" onclick="renderPokemon()">
+        Load more
+      </button>
     </div>
   </body>
 </html>

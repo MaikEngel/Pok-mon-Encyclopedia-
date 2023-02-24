@@ -8,15 +8,14 @@ let pokemonLoaded = false;
 let showButtonFirstTime = false;
 let bottom = false;
 
-
 const onInit = () => {
   fetchPokemon();
 };
 
-const fetchPokemon = () => {
+const fetchPokemon = async () => {
   for (let i = 1; i < 891; i++) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-      .then((response) => response.json())
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+      .then(async (response) => await response.json())
       .then((data) => {
         pokemonData.push({
           id: data.id,
@@ -38,7 +37,10 @@ const renderPokemon = () => {
     let pokemonList = document.querySelector("#pokemonList");
     let pokemonContainer = document.createElement("div");
     pokemonContainer.setAttribute("class", "info-container");
-    pokemonContainer.setAttribute("onclick", `openDetails('${pokemonDataSort[i].name}')`)
+    pokemonContainer.setAttribute(
+      "onclick",
+      `openDetails('${pokemonDataSort[i].name}')`
+    );
     pokemonList.appendChild(pokemonContainer);
     rednerImageContainer(pokemonContainer, pokemonDataSort, i);
     renderIDContainer(pokemonContainer, pokemonDataSort, i);
@@ -96,35 +98,41 @@ const renderTypesContainer = (pokemonContainer, pokemonDataSort, i) => {
 const countPokemon = () => {
   if (maxPokemon >= 888 && !bottom) {
     maxPokemon = 890;
-    currentPokemon = 888
-    bottom = true
-    renderPokemon()
+    currentPokemon = 888;
+    bottom = true;
+    renderPokemon();
   } else {
     maxPokemon += nextPokemon;
     currentPokemon += nextPokemon;
   }
-}
+};
 
 const showButton = () => {
   let loadMoreButton = document.getElementById("loadMoreButton");
   if (!pokemonLoaded && !showButtonFirstTime) {
-    loadMoreButton.classList.remove('d-none')
-    showButtonFirstTime = true
+    loadMoreButton.classList.remove("d-none");
+    showButtonFirstTime = true;
   } else if (pokemonLoaded) {
-    loadMoreButton.classList.add('d-none')
+    loadMoreButton.classList.add("d-none");
   } else if (!pokemonLoaded) {
-    pokemonLoaded = true
+    pokemonLoaded = true;
   }
-}
+};
 
 const openDetails = (name) => {
   location.href = `pages/details-page/details.html?name=${name}`;
-}
+};
 
-window.addEventListener('scroll', () => {
-  let distanceToBottom = document.documentElement.scrollHeight - (window.innerHeight + window.scrollY);
+window.addEventListener("scroll", () => {
+  let distanceToBottom =
+    document.documentElement.scrollHeight -
+    (window.innerHeight + window.scrollY);
   if (distanceToBottom < 50 && maxPokemon <= 889 && pokemonLoaded) {
     console.log(maxPokemon);
-    renderPokemon()
+    renderPokemon();
   }
 });
+
+const test = () => {
+  console.log(pokemonData);
+};

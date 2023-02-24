@@ -1,0 +1,5 @@
+.arrow::before {
+  content: "\2192";
+  display: inline-block;
+  margin-right: 5px;
+}

@@ -17,7 +17,7 @@ const onInitDetails = async () => {
   await fetchImages();
   await fetchPokemonDetails();
   await fetchEvolution();
-  await fetchEvolutionImages();
+  await loadEvolutionImages();
   renderDetailsPage();
 };
 
@@ -46,66 +46,44 @@ const fetchEvolution = async () => {
     .then(async (response) => await response.json())
     .then((data) => {
       evolutionChain.push(data);
-      console.log("Data: ", data);
     })
     .catch((error) => console.error(error));
 };
 
-const fetchEvolutionImages = async () => {
-  let firstEvolution = evolutionChain[0].chain.species.name;
-  await fetch(`https://pokeapi.co/api/v2/pokemon/${firstEvolution}/`)
-    .then(async (response) => await response.json())
-    .then((data) => {
-      evolutionData.push({
-        sprite: data.sprites.other["official-artwork"].front_default,
-        name: data.name,
-      })
-      console.log("DataImages: ", data);
-      console.log(("EvolutionData: ", evolutionData));
-    })
-    .catch((error) => console.error(error));
-  if (evolutionChain) {
+const loadEvolutionImages = async () => {
+  let firstStage = evolutionChain[0].chain.species.name;
+  let evolvesStageTwo = evolutionChain[0].chain.evolves_to;
+  await fetchEvolutionImages(firstStage, "firstStage");
+  if (evolvesStageTwo.length >= 1) {
+    for (let i = 0; i < evolvesStageTwo.length; i++) {
+      let evolvesStageThree = evolutionChain[0].chain.evolves_to[i].evolves_to;
+      let secondStage = evolvesStageTwo[i].species.name;
+      fetchEvolutionImages(secondStage, "secondStage");
+      if (evolvesStageThree.length >= 1) {
+        for (let j = 0; j < evolvesStageThree.length; j++) {
+          let thirdStage = evolvesStageThree[j].species.name;
+          fetchEvolutionImages(thirdStage, "thirdStage");
+        }
+      }
+    }
   }
 };
 
-const renderDetailsPage = () => {
-  renderHeaderContainer();
+fetchEvolutionImages = async (currentPokemon, stage) => {
+  await fetch(`https://pokeapi.co/api/v2/pokemon/${currentPokemon}/`)
+    .then(async (response) => await response.json())
+    .then(async (data) => {
+      await evolutionData.push({
+        sprite: data.sprites.other["official-artwork"].front_default,
+        name: data.name,
+        stage: stage,
+      });
+    })
+    .catch((error) => console.error(error));
 };
 
-const renderHeaderContainer = () => {
-  setTimeout(() => {
-    renderIdAndName();
-    renderOtherLanguageName();
-    renderHeaderImg();
-  }, 1000);
+const renderDetailsPage = async () => {
+  await renderHeaderContainer();
 };
 
-renderIdAndName = () => {
-  let nameAndID = document.getElementById("detailsHeaderContainerName");
-  detailsID = pokemonInfo[0].id;
-  detailsName = pokemonInfo[0].name;
-  nameAndID.innerHTML = `
-  #${(detailsID * 0.001).toFixed(3).toString().replace(".", "")}
-  ${detailsName.charAt(0).toUpperCase() + detailsName.slice(1)}
-  `;
-};
 
-renderOtherLanguageName = () => {
-  let otherLanguageName = document.getElementById(
-    "detailsHeaderContainerNameOtherLanguage"
-  );
-  germanLanguage = pokemonSpecies[0].names[5].language.name;
-  germanName = pokemonSpecies[0].names[5].name;
-  japanLanguage = pokemonSpecies[0].names[9].language.name;
-  japanName = pokemonSpecies[0].names[9].name;
-  otherLanguageName.innerHTML = `${germanName} (${germanLanguage}) - ${japanName} (${japanLanguage})`;
-};
-
-renderHeaderImg = () => {
-  let pokemonImageContainer = document.querySelector("#imageContainer");
-  let pokemonImageContainerCreate = document.createElement("img");
-  let pokemonImage =
-    pokemonInfo[0].sprites.other["official-artwork"].front_default;
-  pokemonImageContainerCreate.src = pokemonImage;
-  pokemonImageContainer.appendChild(pokemonImageContainerCreate);
-};

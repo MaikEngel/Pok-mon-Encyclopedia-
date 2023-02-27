@@ -10,7 +10,12 @@
   </head>
   <body onload="onInit()">
     <div class="content-wrapper bgc-gray br-8 mt-80 d-flex flex-direction-column align-items-center">
-      <div id="pokemonList" class="results"></div>
+      <div id="pokemonList" class="results">
+        <div id="loader" class="d-flex flex-direction-column align-items-center">
+          <div  class="loader"></div>
+          <h3 id="procent"></h3>
+        </div>
+      </div>
       <button id="loadMoreButton" class="d-none" onclick="renderPokemon()">Load more</button>
     </div>
   </body>

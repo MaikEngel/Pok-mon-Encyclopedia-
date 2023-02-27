@@ -4,10 +4,18 @@ body {
   height: auto;
 }
 
+body {
+  margin: 0;
+  background-image: url('../src/images/background/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .img-layout {
   width: 100%;
-  background-color: #dadae4;
   border-radius: 4px;
+
 }
 
 .content-wrapper {
@@ -20,20 +28,29 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 88%;
+  padding: 16px;
 }
 
 .info-container {
   max-width: 22%;
-  border-radius: 4px;
   transform: matrix(1, 0, 0, 1, 0, 0);
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 8px;
   padding-right: 8px;
   margin-bottom: 8px;
-  border: solid 2px rgb(173, 173, 173);
   cursor: pointer;
+  background-image: url("../src/images/img/bg-ball-transparent.png");
+}
+
+.info-container:hover {
+  box-shadow: 0 0 10px var(--light-blue);
+}
+
+.info-container:hover img {
+  margin-top: -40px;
+  margin-bottom: 40px;
+  transition: 0.1s ease-in-out;
 }
 
 .pill {
@@ -41,4 +58,40 @@ body {
   text-align: center;
   border-radius: 4px;
   padding: 4px;
+  background-color: var(--white-transparent);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+button {
+  background-color: var(--light-blue);
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--white-transparent);
+  color: var(--light-blue);
 }

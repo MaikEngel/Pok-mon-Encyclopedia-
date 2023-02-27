@@ -34,9 +34,10 @@ const fetchPokemon = async () => {
 const renderPokemon = () => {
   let pokemonDataSort = pokemonData.sort((a, b) => a.id - b.id);
   for (let i = currentPokemon; i < maxPokemon; i++) {
+    let pokemonType = pokemonDataSort[i].types[0].type.name;
     let pokemonList = document.querySelector("#pokemonList");
     let pokemonContainer = document.createElement("div");
-    pokemonContainer.setAttribute("class", "info-container");
+    pokemonContainer.classList.add("info-container", "br-8", "background-color-" + pokemonType,);
     pokemonContainer.setAttribute(
       "onclick",
       `openDetails('${pokemonDataSort[i].name}')`
@@ -45,7 +46,7 @@ const renderPokemon = () => {
     rednerImageContainer(pokemonContainer, pokemonDataSort, i);
     renderIDContainer(pokemonContainer, pokemonDataSort, i);
     renderNameContainer(pokemonContainer, pokemonDataSort, i);
-    renderTypesContainer(pokemonContainer, pokemonDataSort, i);
+    // renderTypesContainer(pokemonContainer, pokemonDataSort, i);
   }
   showButton();
   countPokemon();
@@ -60,7 +61,7 @@ const rednerImageContainer = (pokemonContainer, pokemonDataSort, i) => {
 };
 
 const renderIDContainer = (pokemonContainer, pokemonDataSort, i) => {
-  let pokemonIDContainer = document.createElement("h5");
+  let pokemonIDContainer = document.createElement("h3");
   let pokemonID = pokemonDataSort[i].id;
   pokemonIDContainer.setAttribute("id", pokemonID);
   pokemonIDContainer.innerHTML =
@@ -69,7 +70,7 @@ const renderIDContainer = (pokemonContainer, pokemonDataSort, i) => {
 };
 
 const renderNameContainer = (pokemonContainer, pokemonDataSort, i) => {
-  let pokemonNameContainer = document.createElement("h4");
+  let pokemonNameContainer = document.createElement("h2");
   let pokemonName = pokemonDataSort[i].name;
   pokemonNameContainer.setAttribute("id", i);
   pokemonNameContainer.innerHTML =
@@ -77,23 +78,22 @@ const renderNameContainer = (pokemonContainer, pokemonDataSort, i) => {
   pokemonContainer.appendChild(pokemonNameContainer);
 };
 
-const renderTypesContainer = (pokemonContainer, pokemonDataSort, i) => {
-  let pokemonTypesContainer = document.createElement("div");
-  pokemonTypesContainer.classList.add("d-flex", "gap-8");
+// const renderTypesContainer = (pokemonContainer, pokemonDataSort, i) => {
+//   let pokemonTypesContainer = document.createElement("div");
+//   pokemonTypesContainer.classList.add("d-flex", "gap-8");
 
-  for (let j = 0; j < pokemonDataSort[i].types.length; j++) {
-    let pokemonTypeContainer = document.createElement("p");
-    let pokemonType = pokemonDataSort[i].types[j].type.name;
-    pokemonTypeContainer.classList.add(
-      "background-color-" + pokemonType,
-      "pill"
-    );
-    pokemonTypeContainer.innerHTML =
-      pokemonType.charAt(0).toUpperCase() + pokemonType.slice(1);
-    pokemonTypesContainer.appendChild(pokemonTypeContainer);
-    pokemonContainer.appendChild(pokemonTypesContainer);
-  }
-};
+//   for (let j = 0; j < pokemonDataSort[i].types.length; j++) {
+//     let pokemonTypeContainer = document.createElement("p");
+//     let pokemonType = pokemonDataSort[i].types[j].type.name;
+//     pokemonTypeContainer.classList.add(
+//       "pill"
+//     );
+//     pokemonTypeContainer.innerHTML =
+//       pokemonType.charAt(0).toUpperCase() + pokemonType.slice(1);
+//     pokemonTypesContainer.appendChild(pokemonTypeContainer);
+//     pokemonContainer.appendChild(pokemonTypesContainer);
+//   }
+// };
 
 const countPokemon = () => {
   if (maxPokemon >= 888 && !bottom) {

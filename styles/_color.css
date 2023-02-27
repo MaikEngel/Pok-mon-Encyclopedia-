@@ -1,0 +1,9 @@
+:root {
+    --white-transparent: #ffffff7f;
+    --gray: #5b5b5b;
+    --light-blue: #add6ff
+}
+
+.bgc-gray {
+    background-color: var(--gray);
+}

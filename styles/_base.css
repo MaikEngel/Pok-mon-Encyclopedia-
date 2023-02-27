@@ -95,3 +95,35 @@ button:hover {
   background-color: var(--white-transparent);
   color: var(--light-blue);
 }
+
+.content-container {
+  background-image: url("../src/images/img/bg-ball-color-transparent.png");
+  background-color: var(--white);
+  background-repeat: no-repeat;
+  width: fit-content;
+  background-size: 90%;
+  background-position: center;
+  border-radius: 8px;
+  border: 3px solid var(--light-blue);
+}
+
+.quick-datails-header {
+  background-color: var(--gray);
+  padding: 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  color: var(--light-blue);
+}
+
+.quick-datails-container {
+  background-color: var(--light-blue-transparent);
+  flex: 2;
+  padding: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.mainField {
+  background-color: var(--white);
+  padding: 8px 4px;
+}

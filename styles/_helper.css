@@ -38,7 +38,38 @@
   border-radius: 16px;
 }
 
+.br-round{
+  border-radius: 100%;
+}
+
+.br-s2-gray{
+  border: solid 2px var(--gray);
+}
+
+.br-s2-light-blue{
+  border: solid 2px var(--light-blue);
+}
+
 .mt-80 {
   margin-top: 80px;
 }
 
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-33 {
+  width: 33.33333333333333%;
+}
+
+.h-100vh{
+  height: 100vh;
+}
+
+.f-2{
+  flex: 2;
+}

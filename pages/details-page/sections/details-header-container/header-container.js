@@ -11,6 +11,7 @@ renderIdAndName = () => {
   let nameAndID = document.getElementById("detailsHeaderContainerName");
   detailsID = pokemonInfo[0].id;
   detailsName = pokemonInfo[0].name;
+  nameAndID.classList.add('br-s2-gray', 'mainField', 'br-8')
   nameAndID.innerHTML = `
     #${(detailsID * 0.001).toFixed(3).toString().replace(".", "")}
     ${detailsName.charAt(0).toUpperCase() + detailsName.slice(1)}
@@ -34,12 +35,12 @@ renderHeaderImg = () => {
   let pokemonImage =
     pokemonInfo[0].sprites.other["official-artwork"].front_default;
   pokemonImageContainerCreate.src = pokemonImage;
+  pokemonImageContainerCreate.setAttribute('class', 'w-100')
   pokemonImageContainer.appendChild(pokemonImageContainerCreate);
 };
 
 renderEvolution = () => {
   let evolutionContainer = document.querySelector("#evolutionChain");
-  evolutionContainer.setAttribute("class", "d-flex");
   setTimeout(() => {
     renderEvolutionContainer(evolutionContainer);
   }, 1000);
@@ -58,6 +59,7 @@ renderEvolutionContainer = async (evolutionContainer) => {
     // }
     if (!stageDivsCreated[stage]) {
       container.setAttribute("id", `stage${i + 1}`);
+      container.classList.add("w-33")
       evolutionContainer.appendChild(container);
       stageDivsCreated[stage] = true;
     }
@@ -76,14 +78,14 @@ renderEvolutionImg = (evolutionData, currentStage, container) => {
   for (let i = 0; i < stage.length; i++) {
     let imgContainer = document.createElement("div");
     let img = document.createElement("img");
+    img.setAttribute('class', 'w-75')
     if (stage[i].stage !== "firstStage") {
       imgContainer.classList.add("arrow", "d-flex", "align-items-center");
     }
     img.src = stage[i].sprite;
     imgContainer.appendChild(img);
     container.appendChild(imgContainer);
-    console.log(stage[i]);
   }
 };
 
-filterEvolutionImg = () => {};
+filterEvolutionImg = () => { };

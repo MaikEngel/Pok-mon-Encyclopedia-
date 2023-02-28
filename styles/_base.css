@@ -54,7 +54,6 @@ body {
 }
 
 .pill {
-  width: 80px;
   text-align: center;
   border-radius: 4px;
   padding: 4px;
@@ -123,7 +122,12 @@ button:hover {
   border-bottom-right-radius: 16px;
 }
 
-.mainField {
+.main-field {
   background-color: var(--white);
   padding: 8px 4px;
+}
+
+.evolution-container {
+  overflow-y: scroll;
+  height: 132px;
 }

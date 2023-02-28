@@ -2,6 +2,8 @@ let evolutionStages = ["firstStage", "secondStage", "thirdStage"];
 
 const renderHeaderContainer = async () => {
   await renderIdAndName();
+  await renderType();
+  await renderSpecies();
   await renderOtherLanguageName();
   await renderHeaderImg();
   await renderEvolution();
@@ -11,12 +13,31 @@ renderIdAndName = () => {
   let nameAndID = document.getElementById("detailsHeaderContainerName");
   detailsID = pokemonInfo[0].id;
   detailsName = pokemonInfo[0].name;
-  nameAndID.classList.add('br-s2-gray', 'mainField', 'br-8')
   nameAndID.innerHTML = `
     #${(detailsID * 0.001).toFixed(3).toString().replace(".", "")}
     ${detailsName.charAt(0).toUpperCase() + detailsName.slice(1)}
     `;
 };
+
+renderType = () => {
+  let pokemonTypes = pokemonInfo[0].types
+  let typeContainer = document.querySelector("#typeContainer");
+  for (let i = 0; i < pokemonTypes.length; i++) {
+    let type = document.createElement("h3")
+    type.classList.add(`background-color-${pokemonTypes[i].type.name}`, "pill", "first-letter-uppercase", "f-1", "pv-8", "br-s2-gray")
+    type.innerHTML = pokemonTypes[i].type.name
+    typeContainer.appendChild(type);
+  }
+}
+
+renderSpecies = () => {
+  let pokemonGenus = pokemonSpecies[0].genera[7].genus
+  let speciesContainer = document.querySelector("#speciesContainer")
+  let species = document.createElement("h3")
+  species.classList.add("main-field", "br-s2-gray", "br-8", "first-letter-uppercase")
+  species.innerHTML = pokemonGenus
+  speciesContainer.appendChild(species)
+}
 
 renderOtherLanguageName = () => {
   let otherLanguageName = document.getElementById(
@@ -49,6 +70,9 @@ renderEvolution = () => {
 renderEvolutionContainer = async (evolutionContainer) => {
   const stageDivsCreated = {};
   console.log(evolutionData);
+  if (evolutionData) {
+    
+  }
   for (let i = 0; i < evolutionData.length; i++) {
     let currentStage = evolutionStages[i];
     let pokemon = evolutionData[i];

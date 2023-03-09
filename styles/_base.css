@@ -6,7 +6,7 @@ body {
 
 body {
   margin: 0;
-  background-image: url('../src/images/background/bg.jpg');
+  background-image: url("../src/images/background/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -15,7 +15,6 @@ body {
 .img-layout {
   width: 100%;
   border-radius: 4px;
-
 }
 
 .content-wrapper {
@@ -27,7 +26,7 @@ body {
 .results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 16px;
 }
 
@@ -127,7 +126,14 @@ button:hover {
   padding: 8px 4px;
 }
 
-.evolution-container {
-  overflow-y: scroll;
-  height: 132px;
+.section-header {
+  background-color: var(--gray);
+  padding: 16px;
+  color: var(--light-blue);
+}
+
+.section-content {
+  background-color: var(--light-blue-transparent);
+  flex: 2;
+  padding: 16px;
 }

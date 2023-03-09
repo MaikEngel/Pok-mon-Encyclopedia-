@@ -9,7 +9,6 @@ let pokemonLoaded = false;
 let showButtonFirstTime = false;
 let bottom = false;
 
-
 const onInit = () => {
   fetchPokemon();
 };
@@ -25,7 +24,7 @@ const fetchPokemon = async () => {
           sprite: data.sprites.other["official-artwork"].front_default,
           types: data.types,
         });
-        if (pokemonData.length === maxPokemonCount) {
+        if (pokemonData.length === 153) {
           hideLoader();
           renderPokemon();
         }
@@ -36,15 +35,15 @@ const fetchPokemon = async () => {
 };
 
 const hideLoader = () => {
-  let loader = document.querySelector('#loader')
-  loader.setAttribute('class', 'd-none')
-}
+  let loader = document.querySelector("#loader");
+  loader.setAttribute("class", "d-none");
+};
 
 const procentBar = (pokemonData) => {
-  let procentBar = document.querySelector('#procent')
-  let procent = (100 / maxPokemonCount * pokemonData.length).toFixed()
-  procentBar.innerHTML = `${procent}%`
-}
+  let procentBar = document.querySelector("#procent");
+  let procent = ((100 / 150) * pokemonData.length).toFixed();
+  procentBar.innerHTML = `${procent}%`;
+};
 
 const renderPokemon = () => {
   let pokemonDataSort = pokemonData.sort((a, b) => a.id - b.id);
@@ -52,7 +51,11 @@ const renderPokemon = () => {
     let pokemonType = pokemonDataSort[i].types[0].type.name;
     let pokemonList = document.querySelector("#pokemonList");
     let pokemonContainer = document.createElement("div");
-    pokemonContainer.classList.add("info-container", "br-8", "background-color-" + pokemonType);
+    pokemonContainer.classList.add(
+      "info-container",
+      "br-8",
+      "background-color-" + pokemonType
+    );
     pokemonContainer.setAttribute(
       "onclick",
       `openDetails('${pokemonDataSort[i].name}')`
@@ -93,14 +96,16 @@ const renderNameContainer = (pokemonContainer, pokemonDataSort, i) => {
 };
 
 const countPokemon = () => {
-  if (maxPokemon >= 888 && !bottom) {
-    maxPokemon = 890;
-    currentPokemon = 888;
-    bottom = true;
-    renderPokemon();
-  } else {
-    maxPokemon += nextPokemon;
-    currentPokemon += nextPokemon;
+  if (!bottom) {
+    if (maxPokemon >= 888 && !bottom) {
+      maxPokemon = 890;
+      currentPokemon = 888;
+      bottom = true;
+      renderPokemon();
+    } else {
+      maxPokemon += nextPokemon;
+      currentPokemon += nextPokemon;
+    }
   }
 };
 
@@ -129,7 +134,3 @@ window.addEventListener("scroll", () => {
     renderPokemon();
   }
 });
-
-const test = () => {
-  console.log(pokemonData);
-};

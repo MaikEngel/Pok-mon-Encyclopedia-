@@ -18,7 +18,7 @@ const onInitDetails = async () => {
   await fetchPokemonDetails();
   await fetchEvolution();
   await loadEvolutionImages();
-  renderDetailsPage();
+  await renderDetailsPage();
 };
 
 const fetchImages = async () => {
@@ -69,7 +69,7 @@ const loadEvolutionImages = async () => {
   }
 };
 
-fetchEvolutionImages = async (currentPokemon, stage) => {
+const fetchEvolutionImages = async (currentPokemon, stage) => {
   await fetch(`https://pokeapi.co/api/v2/pokemon/${currentPokemon}/`)
     .then(async (response) => await response.json())
     .then(async (data) => {
